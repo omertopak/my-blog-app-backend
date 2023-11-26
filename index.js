@@ -59,7 +59,8 @@ app.all('/', (req, res) => {
 })
 
 // Routes:
-app.use(require('./src/routes'))
+// app.use(require('./src/routes'))
+app.use('/blog', require('./app/routes/blog'))
 
 /* ------------------------------------------------------- */
 
