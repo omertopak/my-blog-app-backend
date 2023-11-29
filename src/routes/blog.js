@@ -29,7 +29,7 @@ router.route('/blog/:categoryId')
 // router.route('/post/:postId')
 //     .get(BlogPost.read)
 //     .put(BlogPost.update)
-//     delete(BlogPost.delete)
+//     .delete(BlogPost.delete)
 
 // router.get('/category/:categoryId/posts', BlogPost.listCategoryPosts)
 
