@@ -22,6 +22,7 @@ const BlogSchema = new mongoose.Schema({
 
     image: {
         type: String,
+        trim: true,
         required: true,
         
     },
@@ -73,10 +74,13 @@ const BlogSchema = new mongoose.Schema({
     },
 
     likes_n: {
-        type: json,
+        type: Object,
         
     },
 
-}, { collection: 'blogs', timestamps: true })
+}, { collection: 'blogs', timestamps: {
+    createdAt: 'publish_date', 
+    updatedAt: 'update_date'
+} })
 
 module.exports = mongoose.model('Blog', BlogSchema)

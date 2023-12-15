@@ -30,10 +30,10 @@ dbConnection()
 app.use(express.json())
 
 // Call static uploadFile:
-app.use('/upload', express.static('./upload'))
+// app.use('/upload', express.static('./upload'))
 
 // Check Authentication:
-app.use(require('./src/middlewares/authentication'))
+// app.use(require('./src/middlewares/authentication'))
 
 // Run Logger:
 app.use(require('./src/middlewares/logger'))
@@ -60,7 +60,8 @@ app.all('/', (req, res) => {
 
 // Routes:
 // app.use(require('./src/routes'))
-app.use('/blog', require('./app/routes/blog'))
+app.use('/blog', require('./src/routes/blog'))
+app.use('/category', require('./src/routes/category'))
 
 /* ------------------------------------------------------- */
 

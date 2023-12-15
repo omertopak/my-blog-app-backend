@@ -5,19 +5,19 @@
 const router = require('express').Router()
 
 // Call Controllers:
-const { BlogCategory, BlogPost } = require('../controllers/blogController')
+const { Blog } = require('../controllers/blog')
 
 // ------------------------------------------
-// BlogCategory
+// Blog
 // ------------------------------------------
-router.route('/blog')
-    .get(BlogCategory.list)
-    .post(BlogCategory.create)
+router.route('/')
+    .get(Blog.list)
+    .post(Blog.create)
 
-router.route('/blog/:categoryId')
-    .get(BlogCategory.read)
-    .put(BlogCategory.update)
-    .delete(BlogCategory.delete)
+router.route('/:blogId')
+    .get(Blog.read)
+    .put(Blog.update)
+    .delete(Blog.delete)
 
 // ------------------------------------------
 // BlogPost
