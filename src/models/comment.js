@@ -8,24 +8,18 @@ const { mongoose } = require('../configs/dbConnection')
 const CommentSchema = new mongoose.Schema({
 
     user: {
-        type: String,
-        trim: true,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User'
     },
     content: {
         type: String,
         trim: true,
         required: true,
     },
-    user: {
-        type: String,
-        trim: true,
-        required: true,
-    },
 
 
-}, { collection: 'categories', timestamps: {
+}, { collection: 'comments', timestamps: {
     createdAt: 'time_stamp', 
 }  })
 
-module.exports = mongoose.model('Category', CommentSchema)
+module.exports = mongoose.model('Comment', CommentSchema)

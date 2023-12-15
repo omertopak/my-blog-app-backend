@@ -62,6 +62,7 @@ app.all('/', (req, res) => {
 // app.use(require('./src/routes'))
 app.use('/blog', require('./src/routes/blog'))
 app.use('/category', require('./src/routes/category'))
+app.use('/comment', require('./src/routes/comment'))
 
 /* ------------------------------------------------------- */
 
