@@ -19,6 +19,10 @@ router.route('/:blogId')
     .put(Blog.update)
     .delete(Blog.delete)
 
+
+router.put('/:blogId/pushComments',  Blog.pushComments)
+router.put('/:blogId/pullComments',  Blog.pullComments)
+
 // ------------------------------------------
 // BlogPost
 // ------------------------------------------
