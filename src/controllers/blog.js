@@ -65,18 +65,12 @@ module.exports.Blog = {
 
     },
     pushComments: async (req, res) => {
-        /*
-            #swagger.tags = ["Pizzas"]
-            #swagger.summary = "Add Comments to Pizza"
-        */
+      
 
         const comments = req.body?.comments // ObjectId or [ ObjectIds ]
 
-        // const data = await Pizza.findOne({ _id: req.params.id })
-        // data.comments.push(comments)
-        // await data.save()
-        const data = await Pizza.updateOne({ _id: req.params.blogId }, { $push: { comments: comments } })
-        const newData = await Pizza.findOne({ _id: req.params.blogId }).populate('comments')
+        const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comments } })
+        const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
 
         res.status(202).send({
             error: false,
@@ -87,18 +81,15 @@ module.exports.Blog = {
     },
 
     pullComments: async (req, res) => {
-        /*
-            #swagger.tags = ["Pizzas"]
-            #swagger.summary = "Remove Comments from Pizza"
-        */
+       
 
         const comments = req.body?.comments // ObjectId
 
         // const data = await Pizza.findOne({ _id: req.params.id })
         // data.comments.pull(comments)
         // await data.save()
-        const data = await Pizza.updateOne({ _id: req.params.id }, { $pull: { comments: comments } })
-        const newData = await Pizza.findOne({ _id: req.params.id }).populate('comments')
+        const data = await Blog.updateOne({ _id: req.params.blogId }, { $pull: { comments: comments } })
+        const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
 
         res.status(202).send({
             error: false,
