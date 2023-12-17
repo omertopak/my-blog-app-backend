@@ -10,7 +10,7 @@ module.exports.Blog = {
 
     list: async (req, res) => {
 
-        const data = await Blog.find()
+        const data = await (await Blog.find().populate("comments"))
 
         res.status(200).send({
             error: false,
@@ -68,15 +68,20 @@ module.exports.Blog = {
       
 
         const comments = req.body?.comments // ObjectId or [ ObjectIds ]
-
-        const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comments } })
+        // console.log(comments);
+        // const daata =await Blog.findOne({ _id: req.params.blogId })
+        // daata.comments.push(comments)
+        // await daata.save()
+        const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comments } }) //!neden calismiyor
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
 
         res.status(202).send({
             error: false,
             data,
             commentsCount: newData.comments.length,
-            new: newData
+            new: newData,
+            // daata,
+            comments
         })
     },
 

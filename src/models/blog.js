@@ -49,10 +49,10 @@ const BlogSchema = new mongoose.Schema({
     },
 
     comments:  [ // push, pull
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
-    }
+        {
+          type: mongoose.Schema.Types.ObjectId,
+         ref: 'Comment'
+         }
     ],
 
     category_name: {
