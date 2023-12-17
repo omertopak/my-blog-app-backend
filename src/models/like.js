@@ -23,4 +23,4 @@ const LikeSchema = new mongoose.Schema({
     createdAt: 'time_stamp', 
 }  })
 
-module.exports = mongoose.model('like', LikeSchema)
+module.exports = mongoose.model('Like', LikeSchema)

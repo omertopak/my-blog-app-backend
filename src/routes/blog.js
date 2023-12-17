@@ -22,6 +22,8 @@ router.route('/:blogId')
 
 router.put('/:blogId/pushComments',  Blog.pushComments)
 router.put('/:blogId/pullComments',  Blog.pullComments)
+router.put('/:blogId/pushLikes',  Blog.pushLikes)
+router.put('/:blogId/pullLikes',  Blog.pullLikes)
 
 // ------------------------------------------
 // BlogPost
