@@ -76,10 +76,10 @@ const BlogSchema = new mongoose.Schema({
         
     // },
 
-    likes_n: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Like"
-    },
+    // likes_n: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref:"Like"
+    // },
 
 }, { collection: 'blogs', timestamps: {
     createdAt: 'publish_date', 
