@@ -2,7 +2,7 @@
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-// Blog Controller.:
+// Blog Controller:
 
 const Blog = require('../models/blog')
 
