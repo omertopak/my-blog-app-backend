@@ -24,7 +24,7 @@ module.exports.User = {
         const data = await User.create(req.body)
         if(data.password !== data.password2){
             res.errorStatusCode = 403
-            throw new Error('Passwords have to be same.')
+            throw new Error('Passwords have to be same!')
         }else(
             res.status(201).send({
             error: false,
@@ -52,6 +52,7 @@ module.exports.User = {
         
         // const data = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true }) // return new-data
         const data = await User.updateOne({ _id: req.params.userId }, req.body, { runValidators: true })
+        
 
         res.status(202).send({
             error: false,
@@ -66,7 +67,10 @@ module.exports.User = {
         
         const data = await User.deleteOne({ _id: req.params.userId })
 
-        res.sendStatus( (data.deletedCount >= 1) ? 204 : 404 )
+        res.sendStatus( (data.deletedCount >= 1) ? 204 : 404 ).send({
+            error:!data.deletedCount,
+            data
+        })
 
     },
 }
