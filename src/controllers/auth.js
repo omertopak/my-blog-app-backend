@@ -54,7 +54,9 @@ module.exports = {
     },
 
     refresh: async (req, res) => {
+        const refreshToken = req.body?.bearer?.refreshToken
         
+
     },
 
     logout: async (req, res) => {
