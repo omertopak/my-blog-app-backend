@@ -4,6 +4,8 @@
 ------------------------------------------------------- */
 // Blog Controller:
 
+//? BURAYA ADMINLERIN ERSIM HAKKINI VE NORMAL USERLARIN GET ISTEKLERINI AYARLA
+
 const User = require('../models/user')
 
 module.exports.User = {
