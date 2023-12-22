@@ -44,22 +44,27 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 /* ------------------------------------------------------- */
 // Routes:
 
+// Check Authentication:
+app.use(require('./src/middlewares/authentication'))
+
+
 // HomePath:
-app.all('/', (req, res) => {
-    res.send({
-        error: false,
-        message: 'Welcome to Stock Management API',
-        documents: {
-            swagger: '/documents/swagger',
-            redoc: '/documents/redoc',
-            json: '/documents/json',
-        },
-        user: req.user
-    })
-})
+ app.all('/', (req, res) => {
+     res.send({
+         error: false,
+         message: 'Welcome to Stock Management API',
+         documents: {
+             swagger: '/documents/swagger',
+             redoc: '/documents/redoc',
+             json: '/documents/json',
+         },
+         user: req.user
+     })
+ })
 
 // Routes:
 // app.use(require('./src/routes'))
+app.use('/auth', require('./src/routes/auth'))
 app.use('/blog', require('./src/routes/blog'))
 app.use('/category', require('./src/routes/category'))
 app.use('/comment', require('./src/routes/comment'))
