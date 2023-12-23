@@ -76,7 +76,7 @@ module.exports.Blog = {
         // const daata =await Blog.findOne({ _id: req.params.blogId })
         // daata.comments.push(comments)
         // await daata.save()
-        const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comments } }) //!neden calismiyor
+        const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comments } }) 
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
 
         res.status(202).send({
