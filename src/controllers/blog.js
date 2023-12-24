@@ -15,6 +15,7 @@ module.exports.Blog = {
         const data = await Blog.find()
         .populate("comments")
         .populate("category")
+        .populate("author")
         
         
 
