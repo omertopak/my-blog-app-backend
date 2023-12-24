@@ -18,8 +18,9 @@ module.exports = async (req, res, next) => {
 
             const tokenData = await Token.findOne({ token: tokenKey[1] }).populate('user_id')
             req.user = tokenData ? tokenData.user_id : undefined
-
             //! login olan kullanicinin token key ile kim oldugunu tespit ettik ve middleware ozelligi olan req.user seklinde request icine kim oldugunu attik user icinde artik user id sini her yere tasimis oluyoruz ve next diyerek ilerdeki islemlerde kullanacagiz eger bir login islemi yoksa userr da null verisi var ve yetkilendirilemeyecek.
+
+            //!ayrica Token model de user_id diye tanimladigimiz kullanici user ile ref oldugu icin o id den tum kullanici bilgilerine erismis olduk.
 
         // } 
         // else if (tokenKey[0] == 'Bearer') { // JWT
