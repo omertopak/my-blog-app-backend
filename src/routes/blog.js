@@ -6,10 +6,11 @@ const router = require('express').Router()
 
 // Call Controllers:
 const { Blog } = require('../controllers/blog')
-
+const {isLogin} = require('../middlewares/permissions')
 // ------------------------------------------
 // Blog
 // ------------------------------------------
+router.use(isLogin)
 router.route('/')
     .get(Blog.list)
     .post(Blog.create)

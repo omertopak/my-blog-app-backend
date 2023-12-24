@@ -9,11 +9,12 @@ module.exports = {
     isLogin: (req, res, next) => {
 
         // Set Passive:
-        return next()
+        // return next()
+        const id = req.user._id
 
+        // req.author = req.user._id
         // any User:
         if (req.user) {
-
             next()
 
         } else {
