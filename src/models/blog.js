@@ -34,11 +34,6 @@ const BlogSchema = new mongoose.Schema({
         
     },
 
-    // publish_date: {
-    //     type: Date,
-    //     trim: true,
-        
-    // },
 
     author: {
         type:mongoose.Schema.Types.ObjectId,
@@ -59,14 +54,12 @@ const BlogSchema = new mongoose.Schema({
     ],
 
     category_name: {
-        type:String
-        
+        type:String,
+        default:function () {
+            return this.category.name;
+        },
     },
 
-    likes: {
-        type: Number,
-        
-    },
 
     post_viewers: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -87,9 +80,16 @@ const BlogSchema = new mongoose.Schema({
         }
     },
 
-    likes_n: {
+    likes_n: [{
         type: mongoose.Schema.Types.ObjectId,
         ref:"Like"
+    }],
+
+    likes: {
+        type: Number,
+        default: function () {
+            return this.likes_n.count
+        }
     },
 
 }, { collection: 'blogs', timestamps: {

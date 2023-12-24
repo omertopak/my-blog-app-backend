@@ -129,39 +129,23 @@ module.exports.Blog = {
         })
     },
 
-    pushLikes: async (req, res) => {
+    like: async (req, res) => {
       
-
-        const likes = req.body?.likes // ObjectId or [ ObjectIds ]
-        // console.log(likes);
-        // const daata =await Blog.findOne({ _id: req.params.blogId })
-        // daata.likes.push(likes)
-        // await daata.save()
-        const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { likes: likes } }) 
+        const author = req.user?._id
+        console.log("like");
+        // if(newData.filter(e=>e.author==author)){
+        //     const data = await Blog.updateOne({ _id: req.params.blogId }, { $pull: { likes_n: author } }) 
+        // }else{
+        //     const data = await Blog.updateOne({ _id: req.params.blogId }, { $addToSet: { likes_n: author } }) 
+        // }
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('likes_n')
-
         res.status(202).send({
             error: false,
             data,
             likesCount: newData.likes.length,
             new: newData,
-            
             likes
         })
     },
 
-    pullLikes: async (req, res) => {
-       
-
-        const likes = req.body?.likes // ObjectId
-        const data = await Blog.updateOne({ _id: req.params.blogId }, { $pull: { likes: likes } })
-        const newData = await Blog.findOne({ _id: req.params.blogId }).populate('likes_n')
-
-        res.status(202).send({
-            error: false,
-            data,
-            likesCount: newData.likes.length,
-            new: newData
-        })
-    },
 }
