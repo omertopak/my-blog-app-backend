@@ -25,23 +25,21 @@ module.exports = {
                     user_id: user._id,
                     token: passwordEncrypt(user._id + Date.now())
                 })
-                //? jwt ile sifreleme
-                    const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_KEY, { expiresIn: '30m' })
-                    const refreshToken = jwt.sign({ _id: user._id, password: user.password }, process.env.REFRESH_KEY, { expiresIn: '3d' })
-                //jwt.sign bize kontrol sistemi icinde olan access ve refresh tokenimizi olusturdu. bizim yapmamiz gereken kontolunu saglamak.
+                                    // //? jwt ile sifreleme
+                                    //     const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_KEY, { expiresIn: '30m' })
+                                    //     const refreshToken = jwt.sign({ _id: user._id, password: user.password }, process.env.REFRESH_KEY, { expiresIn: '3d' })
+                                    // //jwt.sign bize kontrol sistemi icinde olan access ve refresh tokenimizi olusturdu. bizim yapmamiz gereken kontolunu saglamak.
 
                     res.send({
                         error: false,
                         // FOR REACT PROJECT:
                         key: tokenData.token,
                         // token: tokenData.token,
-                        bearer: { accessToken, refreshToken },   //burada da access token ve refresh tokeni kullanmamiz icin aldik.
+                                        // bearer: { accessToken, refreshToken },   //burada da access token ve refresh tokeni kullanmamiz icin aldik.
                         user,
+                        message:"Succesfully Logged In"
                     })
-                res.status(200).send({
-                    error:false,
-                    message:"Succesfully Logged In"
-                })
+               
             }
                 
             }else{
