@@ -10,11 +10,12 @@ const User = require('../models/user')
 module.exports.Blog = {
 
     list: async (req, res) => {
+       
 
-        const data = await (await Blog.find()
+        const data = await Blog.find()
         .populate("comments")
         .populate("category")
-        )
+        
         
 
         res.status(200).send({
@@ -26,13 +27,28 @@ module.exports.Blog = {
 
     create: async (req, res) => {
 
-        const data = await Blog.create(req.body)
-        if(data.author?._id)
+        // const data = await Blog.create(req.body)
+        //  //! permission middleware ile req.user ile user id buraya geldi
+        //  console.log("userid=",req.user._id);
+        // if(data.author?._id)
+        // res.status(201).send({
+        //     error: false,
+        //     body: req.body,
+        //     result: data,
+        // })
+        let body =  req.body
+        const author = req.user._id
+        body.author=author
+        console.log(body);
+        body.author=author
+        const data = await Blog.create(body)
+       
         res.status(201).send({
             error: false,
             body: req.body,
             result: data,
         })
+
     },
 
     read: async (req, res) => {
