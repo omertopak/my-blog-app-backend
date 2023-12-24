@@ -5,6 +5,7 @@
 // Blog Controller:
 
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 module.exports.Blog = {
 
@@ -26,7 +27,7 @@ module.exports.Blog = {
     create: async (req, res) => {
 
         const data = await Blog.create(req.body)
-
+        if(data.author?._id)
         res.status(201).send({
             error: false,
             body: req.body,

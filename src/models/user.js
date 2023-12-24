@@ -85,3 +85,17 @@ const UserSchema = new mongoose.Schema({
 
 /* ------------------------------------------------------- */
 module.exports = mongoose.model('User', UserSchema)
+
+
+//POST MODEL
+// {
+//     "username": "",
+//     "first_name": "",
+//     "last_name": "",
+//     "email": "",
+//     "image": "",
+//     "bio": "",
+//     "password": "",
+//     "password2": "",
+   
+// }

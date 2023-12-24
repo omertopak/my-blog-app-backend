@@ -4,7 +4,7 @@
 ------------------------------------------------------- */
 // app.use(authentication):
 
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 const Token = require('../models/token')
 
 module.exports = async (req, res, next) => {
@@ -14,15 +14,18 @@ module.exports = async (req, res, next) => {
 
     if (tokenKey) {
 
-        if (tokenKey[0] == 'Token') { // SimpleToken
+        // if (tokenKey[0] == 'Token') { // SimpleToken
 
             const tokenData = await Token.findOne({ token: tokenKey[1] }).populate('user_id')
             req.user = tokenData ? tokenData.user_id : undefined
 
-        } else if (tokenKey[0] == 'Bearer') { // JWT
+            //! login olan kullanicinin token key ile kim oldugunu tespit ettik ve middleware ozelligi olan req.user seklinde request icine kim oldugunu attik user icinde artik user id sini her yere tasimis oluyoruz ve next diyerek ilerdeki islemlerde kullanacagiz eger bir login islemi yoksa userr da null verisi var ve yetkilendirilemeyecek.
 
-            jwt.verify(tokenKey[1], process.env.ACCESS_KEY, (err, userData) => req.user = userData)
-        }
+        // } 
+        // else if (tokenKey[0] == 'Bearer') { // JWT
+
+        //     jwt.verify(tokenKey[1], process.env.ACCESS_KEY, (err, userData) => req.user = userData)
+        // }
     }
     next()
 }
