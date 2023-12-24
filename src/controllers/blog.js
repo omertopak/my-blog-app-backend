@@ -41,7 +41,6 @@ module.exports.Blog = {
         const author = req.user._id
         body.author=author
         console.log(body);
-        body.author=author
         const data = await Blog.create(body)
        
         res.status(201).send({
@@ -55,9 +54,10 @@ module.exports.Blog = {
     read: async (req, res) => {
 
         // req.params.categoryId
-        // const data = await Blog.findById(req.params.categoryId)
-        const data = await Blog.findOne({ _id: req.params.blogId })
-
+        const author = req.user._id
+        await Blog.updateOne({ _id: req.params.blogId },{ $addToSet: { post_viewers: author} })
+        const data = await Blog.findById(req.params.blogId)
+        
         res.status(200).send({
             error: false,
             result: data
@@ -68,7 +68,10 @@ module.exports.Blog = {
     update: async (req, res) => {
         
         // const data = await Blog.findByIdAndUpdate(req.params.categoryId, req.body, { new: true }) // return new-data
-        const data = await Blog.updateOne({ _id: req.params.blogId }, req.body, { runValidators: true })
+        let body =  req.body
+        const author = req.user._id
+        body.author=author
+        const data = await Blog.updateOne({ _id: req.params.blogId }, body, { runValidators: true })
 
         res.status(202).send({
             error: false,

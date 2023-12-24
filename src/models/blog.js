@@ -58,24 +58,34 @@ const BlogSchema = new mongoose.Schema({
          }
     ],
 
-    // category_name: {
-    //     type:String
-    // },
-
-    // likes: {
-    //     type: Number,
+    category_name: {
+        type:String
         
-    // },
+    },
 
-    // post_views: {
-    //     type: Number,
+    likes: {
+        type: Number,
         
-    // },
+    },
 
-    // comment_count: {
-    //     type: Number,
-        
-    // },
+    post_viewers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }],
+
+    post_views:{
+        type:Number,
+        default:function () {
+            return this.post_viewers.length;
+        },
+    },
+
+    comment_count: {
+        type: Number,
+        default: function () {
+            return this.comments.count
+        }
+    },
 
     likes_n: {
         type: mongoose.Schema.Types.ObjectId,

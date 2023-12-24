@@ -14,7 +14,6 @@ router.use(isLogin)
 router.route('/')
     .get(Blog.list)
     .post(Blog.create)
-
 router.route('/:blogId')
     .get(Blog.read)
     .put(Blog.update)
