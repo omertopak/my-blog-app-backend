@@ -33,7 +33,7 @@ app.use(express.json())
 // app.use('/upload', express.static('./upload'))
 
 // Check Authentication:
-// app.use(require('./src/middlewares/authentication'))
+app.use(require('./src/middlewares/authentication'))
 
 // Run Logger:
 app.use(require('./src/middlewares/logger'))
@@ -44,23 +44,21 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 /* ------------------------------------------------------- */
 // Routes:
 
-// Check Authentication:
-app.use(require('./src/middlewares/authentication'))
-
 
 // HomePath:
- app.all('/', (req, res) => {
-     res.send({
-         error: false,
-         message: 'Welcome to Stock Management API',
-         documents: {
-             swagger: '/documents/swagger',
-             redoc: '/documents/redoc',
-             json: '/documents/json',
-         },
-         user: req.user
-     })
- })
+app.all('/', (req, res) => {
+    res.send({
+        error: false,
+        message: 'Welcome to Stock Management API',
+        documents: {
+            swagger: '/documents/swagger',
+            redoc: '/documents/redoc',
+            json: '/documents/json',
+        },
+        user: req.user
+    })
+})
+
 
 // Routes:
 // app.use(require('./src/routes'))
