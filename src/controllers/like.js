@@ -51,7 +51,7 @@ module.exports.Like = {
         res.status(202).send({
             error: false,
             body: req.body,
-            result: data, // update infos
+            result: data, 
             newData: await Like.findOne({ _id: req.params.likeId })
         })
 
