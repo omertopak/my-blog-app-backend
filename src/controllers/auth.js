@@ -3,7 +3,7 @@
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
 const Token = require('../models/token')
@@ -75,10 +75,11 @@ module.exports = {
                 result = await Token.deleteOne({ token: tokenKey[1] })
                 message = 'Token deleted. Logout was OK.'
 
-            } else { // JWT
+            } 
+            // else { // JWT
 
-                message = 'No need any process for logout. You must delete JWT tokens.'
-            }
+            //     message = 'No need any process for logout. You must delete JWT tokens.'
+            // }
         }
 
         res.send({
