@@ -5,7 +5,6 @@
 // Blog Controller:
 
 const Blog = require('../models/blog')
-const User = require('../models/user')
 const Comment = require('../models/comment')
 const Like = require('../models/like')
 module.exports.Blog = {
