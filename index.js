@@ -62,12 +62,12 @@ app.all('/', (req, res) => {
 
 // Routes:
 // app.use(require('./src/routes'))
-app.use('/auth', require('./src/routes/auth'))
-app.use('/blog', require('./src/routes/blog'))
-app.use('/category', require('./src/routes/category'))
-app.use('/comment', require('./src/routes/comment'))
-app.use('/like', require('./src/routes/like'))
-app.use('/user', require('./src/routes/user'))
+app.use('/users/auth', require('./src/routes/auth'))
+app.use('/api/blogs', require('./src/routes/blog'))
+app.use('/api/categories', require('./src/routes/category'))
+app.use('/api/comments', require('./src/routes/comment'))
+app.use('/likes', require('./src/routes/like'))
+app.use('/users', require('./src/routes/user'))
 
 /* ------------------------------------------------------- */
 
@@ -79,4 +79,3 @@ app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`))
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
-// require('./src/helpers/sync')() // !!! It clear database.

@@ -12,8 +12,7 @@ const { User } = require('../controllers/user')
 // ------------------------------------------
 router.route('/')
     .get(User.list)
-    .post(User.create)
-
+router.post('/register', User.create) 
 router.route('/:userId')
     .get(User.read)
     .put(User.update)

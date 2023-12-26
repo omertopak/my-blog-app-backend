@@ -77,7 +77,7 @@ module.exports.Blog = {
         res.status(202).send({
             error: false,
             body: req.body,
-            result: data, // update infos
+            result: data, 
             newData: await Blog.findOne({ _id: req.params.blogId })
         })
 
@@ -92,8 +92,6 @@ module.exports.Blog = {
     },
     pushComments: async (req, res) => {
       
-
-        const comments = req.body?.comments // ObjectId or [ ObjectIds ]
         const comment = await Comment.create(req.body)
         const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comment._id } }) 
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
@@ -103,16 +101,13 @@ module.exports.Blog = {
             data,
             commentsCount: newData.comments.length,
             new: newData,
-            // daata,
             comments
         })
     },
 
     pullComments: async (req, res) => {
        
-
         const comments = req.body?.comments 
-
         const data = await Blog.updateOne({ _id: req.params.blogId }, { $pull: { comments: comments } })
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
 
@@ -130,6 +125,7 @@ module.exports.Blog = {
         const author = req.user?._id
         const post_id = req.params?.blogId
         const check = await Like.findOne({post_id: post_id,user_id:author})
+
         if(check){
             await Like.deleteOne({user_id:author,post_id:post_id})
             message = "you disliked a post"
