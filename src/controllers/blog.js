@@ -7,7 +7,7 @@
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const Comment = require('../models/comment')
-
+const Like = require('../models/like')
 module.exports.Blog = {
 
     list: async (req, res) => {
@@ -94,10 +94,6 @@ module.exports.Blog = {
       
 
         const comments = req.body?.comments // ObjectId or [ ObjectIds ]
-        // console.log(comments);
-        // const daata =await Blog.findOne({ _id: req.params.blogId })
-        // daata.comments.push(comments)
-        // await daata.save()
         const comment = await Comment.create(req.body)
         const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comment._id } }) 
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
@@ -115,11 +111,8 @@ module.exports.Blog = {
     pullComments: async (req, res) => {
        
 
-        const comments = req.body?.comments // ObjectId
+        const comments = req.body?.comments 
 
-        // const data = await Pizza.findOne({ _id: req.params.id })
-        // data.comments.pull(comments)
-        // await data.save()
         const data = await Blog.updateOne({ _id: req.params.blogId }, { $pull: { comments: comments } })
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
 
@@ -133,20 +126,28 @@ module.exports.Blog = {
 
     like: async (req, res) => {
       
+        let message = ""
         const author = req.user?._id
-        console.log("like");
-        // if(newData.filter(e=>e.author==author)){
-        //     const data = await Blog.updateOne({ _id: req.params.blogId }, { $pull: { likes_n: author } }) 
-        // }else{
-        //     const data = await Blog.updateOne({ _id: req.params.blogId }, { $addToSet: { likes_n: author } }) 
-        // }
+        const post_id = req.params?.blogId
+        const check = await Like.findOne({post_id: post_id,user_id:author})
+        if(check){
+            await Like.deleteOne({user_id:author,post_id:post_id})
+            message = "you disliked a post"
+        }else{
+            const like = await Like.create({user_id:author,post_id:post_id})
+            const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { likes_n: like._id } })
+            message = "You liked a post"
+        }
+        
+        
+       
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('likes_n')
         res.status(202).send({
             error: false,
-            data,
-            likesCount: newData.likes.length,
+            message:message,
+            likesCount: newData.likes_n.length,
             new: newData,
-            likes
+            
         })
     },
 
