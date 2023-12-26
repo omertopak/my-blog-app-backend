@@ -67,17 +67,27 @@ module.exports.Blog = {
     },
 
     update: async (req, res) => {
-        
-        // const data = await Blog.findByIdAndUpdate(req.params.categoryId, req.body, { new: true }) // return new-data
+        let data = {}
+        let message = ""
         let body =  req.body
         const author = req.user._id
-        body.author=author
-        const data = await Blog.updateOne({ _id: req.params.blogId }, body, { runValidators: true })
+        const dataCheck = await Blog.findOne({ _id: req.params.blogId })
+        console.log("data",dataCheck.author,author);
+        const check = String(dataCheck.author)===String(author)
+        console.log("check",check);
+        if(check){
+            const data = await Blog.updateOne({ _id: req.params.blogId }, body, { runValidators: true })
+            message = "updated"
+        }else{
+            throw new Error ("you can't edit this post.Only author can edit.")
+        }
+        
 
         res.status(202).send({
             error: false,
             body: req.body,
             result: data, 
+            message:message,
             newData: await Blog.findOne({ _id: req.params.blogId })
         })
 
@@ -125,7 +135,7 @@ module.exports.Blog = {
         const author = req.user?._id
         const post_id = req.params?.blogId
         const check = await Like.findOne({post_id: post_id,user_id:author})
-
+        
         if(check){
             await Like.deleteOne({user_id:author,post_id:post_id})
             message = "you disliked a post"
