@@ -31,9 +31,14 @@ const BlogSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"Category",
         required:true
-        
     },
 
+    category_name: {
+        type:String,
+        default: () => {
+            return this.category;
+        },
+    },
 
     author: {
         type:mongoose.Schema.Types.ObjectId,
@@ -52,13 +57,6 @@ const BlogSchema = new mongoose.Schema({
          ref: 'Comment'
          }
     ],
-
-    category_name: {
-        type:String,
-        default:function () {
-            return this.category.name;
-        },
-    },
 
 
     post_viewers: [{

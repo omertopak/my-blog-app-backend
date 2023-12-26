@@ -6,6 +6,7 @@
 
 const Blog = require('../models/blog')
 const User = require('../models/user')
+const Comment = require('../models/comment')
 
 module.exports.Blog = {
 
@@ -15,7 +16,7 @@ module.exports.Blog = {
         const data = await Blog.find()
         .populate("comments")
         .populate("category")
-        .populate("author")
+        // .populate("author")
         
         
 
@@ -97,7 +98,8 @@ module.exports.Blog = {
         // const daata =await Blog.findOne({ _id: req.params.blogId })
         // daata.comments.push(comments)
         // await daata.save()
-        const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comments } }) 
+        const comment = await Comment.create(req.body)
+        const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comment._id } }) 
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
 
         res.status(202).send({
