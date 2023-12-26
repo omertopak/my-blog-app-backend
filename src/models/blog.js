@@ -74,7 +74,7 @@ const BlogSchema = new mongoose.Schema({
     comment_count: {
         type: Number,
         default: function () {
-            return this.comments.count
+            return this.comments.length
         }
     },
 
@@ -86,7 +86,7 @@ const BlogSchema = new mongoose.Schema({
     likes: {
         type: Number,
         default: function () {
-            return this.likes_n.count
+            return this.likes_n.length
         }
     },
 
