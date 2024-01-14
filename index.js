@@ -44,7 +44,7 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 /* ------------------------------------------------------- */
 // Routes:
 
-router.use('/documents', require('./src/routes/document'))
+app.use('/documents', require('./src/routes/document'))
 // HomePath:
 app.all('/', (req, res) => {
     res.send({
