@@ -13,7 +13,9 @@ module.exports.Category = {
         const data = await Category.find()
 
         res.status(200).send({
-            data
+            error: false,
+            count: data.length,
+            result: data
         })
     },
 
