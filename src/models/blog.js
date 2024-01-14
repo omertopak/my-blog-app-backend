@@ -69,13 +69,19 @@ const BlogSchema = new mongoose.Schema({
         default:function () {
             return this.post_viewers.length;
         },
+        transform: function () {
+            return this.post_viewers.length;
+        },
     },
 
     comment_count: {
         type: Number,
         default: function () {
             return this.comments.length
-        }
+        }, 
+        transform: function () {
+            return this.comments.length;
+        },
     },
 
     likes_n: [{
@@ -87,7 +93,10 @@ const BlogSchema = new mongoose.Schema({
         type: Number,
         default: function () {
             return this.likes_n.length
-        }
+        },
+        transform: function () {
+            return this.likes_n.length;
+        },
     },
 
 }, { collection: 'blogs', timestamps: {

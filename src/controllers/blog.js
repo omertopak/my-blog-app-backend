@@ -7,6 +7,7 @@
 const Blog = require('../models/blog')
 const Comment = require('../models/comment')
 const Like = require('../models/like')
+
 module.exports.Blog = {
 
     list: async (req, res) => {
@@ -133,10 +134,14 @@ module.exports.Blog = {
         let message = ""
         const author = req.user?._id
         const post_id = req.params?.blogId
+        // const deleeteee = Blog.likes_n.findOne({_id:check._id})
+        // console.log(deleeteee);
         const check = await Like.findOne({post_id: post_id,user_id:author})
         
         if(check){
+            await Blog.updateOne({ _id: req.params.blogId }, { $pull: { likes_n: check._id } })
             await Like.deleteOne({user_id:author,post_id:post_id})
+            console.log(check);
             message = "you disliked a post"
         }else{
             const like = await Like.create({user_id:author,post_id:post_id})
