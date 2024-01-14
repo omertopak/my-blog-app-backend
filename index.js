@@ -44,12 +44,12 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 /* ------------------------------------------------------- */
 // Routes:
 
-
+router.use('/documents', require('./src/routes/document'))
 // HomePath:
 app.all('/', (req, res) => {
     res.send({
         error: false,
-        message: 'Welcome to Stock Management API',
+        message: 'Welcome to Blogapp API',
         documents: {
             swagger: '/documents/swagger',
             redoc: '/documents/redoc',
