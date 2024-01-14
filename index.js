@@ -75,7 +75,7 @@ app.use('/users', require('./src/routes/user'))
 app.use(require('./src/middlewares/errorHandler'))
 
 // RUN SERVER:
-app.listen(PORT, () => console.log(`http://${PORT}`))
+app.listen(PORT, () => console.log(`http://${HOST}:${PORT}`))
 // app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`))
 
 /* ------------------------------------------------------- */

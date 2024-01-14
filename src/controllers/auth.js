@@ -40,7 +40,17 @@ module.exports = {
                         message:"Succesfully Logged In"
                     })
                
-            }
+                }else{
+                    res.send({
+                        error: false,
+                        // FOR REACT PROJECT:
+                        key: tokenData.token,
+                        // token: tokenData.token,
+                                        // bearer: { accessToken, refreshToken },   //burada da access token ve refresh tokeni kullanmamiz icin aldik.
+                        user,
+                        message:"Succesfully Logged In"
+                    })
+                }
                 
             }else{
                 res.status(500).send({
