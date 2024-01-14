@@ -1,15 +1,15 @@
 {
-  "title": "Stock Management API",
-  "name": "stockapi",
+  "title": "Blog API",
+  "name": "blogger",
   "version": "1.0.0",
-  "description": "Stock Management System",
+  "description": "Blogger website",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "debug": "DEBUG=* nodemon"
   },
   "keywords": [],
-  "author": "Clarusway",
+  "author": "OmerTopak",
   "license": "ISC Licence",
   "dependencies": {
     "cors": "^2.8.5",

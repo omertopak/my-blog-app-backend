@@ -15,7 +15,7 @@ const document = {
 		title: packageJson.title,
 		description: packageJson.description,
 		termsOfService: "http://www.clarusway.com/#",
-		contact: { name: packageJson.author, email: "qadir@clarusway.com" },
+		contact: { name: packageJson.author, email: "omertopak1@gmail.com" },
 		license: { name: packageJson.license, },
 	},
 	host: `${HOST}:${PORT}`,
@@ -40,13 +40,12 @@ const document = {
 	security: [{ Token: [] }, { Bearer: [] }],
 	definition: {
 		// Models:
-		"User": require('./src/models/user').schema.obj,
-		"Brand": require('./src/models/brand').schema.obj,
+		"Blog": require('./src/models/blog').schema.obj,
 		"Category": require('./src/models/category').schema.obj,
-		"Firm": require('./src/models/firm').schema.obj,
-		"Product": require('./src/models/product').schema.obj,
-		"Purchase": require('./src/models/purchase').schema.obj,
-		"Sale": require('./src/models/sale').schema.obj,
+		"Comment": require('./src/models/comment').schema.obj,
+		"Like": require('./src/models/like').schema.obj,
+		"Token": require('./src/models/token').schema.obj,
+		"User": require('./src/models/user').schema.obj,
 	}
 }
 
