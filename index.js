@@ -28,7 +28,7 @@ dbConnection()
 
 // Accept JSON:
 app.use(express.json())
-
+app.use(require('cors')())
 // Call static uploadFile:
 // app.use('/upload', express.static('./upload'))
 
@@ -36,7 +36,7 @@ app.use(express.json())
 app.use(require('./src/middlewares/authentication'))
 
 // Run Logger:
-app.use(require('./src/middlewares/logger'))
+// app.use(require('./src/middlewares/logger'))
 
 // res.getModelList():
 app.use(require('./src/middlewares/findSearchSortPage'))
@@ -75,7 +75,8 @@ app.use('/users', require('./src/routes/user'))
 app.use(require('./src/middlewares/errorHandler'))
 
 // RUN SERVER:
-app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`))
+app.listen(PORT, () => console.log(`http://${PORT}`))
+// app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`))
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
