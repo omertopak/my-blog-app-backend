@@ -86,7 +86,7 @@ const BlogSchema = new mongoose.Schema({
 
     likes_n: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"Like"
+        ref:"User"
     }],
 
     likes: {

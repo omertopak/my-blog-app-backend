@@ -134,18 +134,14 @@ module.exports.Blog = {
         let message = ""
         const author = req.user?._id
         const post_id = req.params?.blogId
-        // const deleeteee = Blog.likes_n.findOne({_id:check._id})
-        // console.log(deleeteee);
-        const check = await Like.findOne({post_id: post_id,user_id:author})
+        const check = await Blog.findOne({_id: post_id , likes_n: author})
         
         if(check){
-            await Blog.updateOne({ _id: req.params.blogId }, { $pull: { likes_n: check._id } })
-            await Like.deleteOne({user_id:author,post_id:post_id})
+            await Blog.updateOne({ _id: post_id }, { $pull: { likes_n: author } })
             console.log(check);
             message = "you disliked a post"
         }else{
-            const like = await Like.create({user_id:author,post_id:post_id})
-            const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { likes_n: like._id } })
+            const data = await Blog.updateOne({ _id: post_id }, { $push: { likes_n: author } })
             message = "You liked a post"
         }
         
