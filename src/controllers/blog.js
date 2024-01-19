@@ -111,7 +111,7 @@ module.exports.Blog = {
             data,
             commentsCount: newData.comments.length,
             new: newData,
-            comments
+            
         })
     },
 
