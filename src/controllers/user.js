@@ -30,7 +30,7 @@ module.exports.User = {
         }else(
             res.status(201).send({
             error: false,
-            body: req.body,
+            user: req.body,
             result: data,
         })
         )
@@ -58,7 +58,7 @@ module.exports.User = {
 
         res.status(202).send({
             error: false,
-            body: req.body,
+            user: req.body,
             result: data, // update infos
             newData: await User.findOne({ _id: req.params.userId })
         })
