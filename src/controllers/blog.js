@@ -56,12 +56,14 @@ module.exports.Blog = {
 
         // req.params.categoryId
         const author = req.user._id
+        // console.log(req.user);
         await Blog.updateOne({ _id: req.params.blogId },{ $addToSet: { post_viewers: author} })
-        const data = await Blog.findById(req.params.blogId)
+        const data = await Blog.findById(req.params.blogId).populate("comments")
         
         res.status(200).send({
             error: false,
             result: data
+            
         })
 
     },
@@ -101,8 +103,12 @@ module.exports.Blog = {
 
     },
     pushComments: async (req, res) => {
-      
-        const comment = await Comment.create(req.body)
+        let body =  req.body
+        const username = req.user.username
+        body.username=username
+        // console.log(body);
+
+        const comment = await Comment.create(body)
         const data = await Blog.updateOne({ _id: req.params.blogId }, { $push: { comments: comment._id } }) 
         const newData = await Blog.findOne({ _id: req.params.blogId }).populate('comments')
 

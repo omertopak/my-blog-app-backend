@@ -22,7 +22,7 @@ module.exports.Comment = {
     create: async (req, res) => {
 
         const data = await Commnent.create(req.body)
-
+        
         res.status(201).send({
             error: false,
             body: req.body,
