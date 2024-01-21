@@ -54,13 +54,13 @@ module.exports.User = {
         
         // const data = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true }) // return new-data
         const data = await User.updateOne({ _id: req.params.userId }, req.body, { runValidators: true })
-        
+        const newData = await User.findOne({ _id: req.params.userId })
 
         res.status(202).send({
             error: false,
             user: req.body,
             result: data, // update infos
-            newData: await User.findOne({ _id: req.params.userId })
+            newData: newData
         })
 
     },
