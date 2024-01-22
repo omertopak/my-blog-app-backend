@@ -52,6 +52,7 @@ module.exports.User = {
 
     update: async (req, res) => {
         
+        if(req.body.password==req.body.password2){
         // const data = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true }) // return new-data
         const data = await User.updateOne({ _id: req.params.userId }, req.body, { runValidators: true })
         const newData = await User.findOne({ _id: req.params.userId })
@@ -62,7 +63,10 @@ module.exports.User = {
             result: data, // update infos
             newData: newData
         })
-
+        }else{
+            res.errorStatusCode = 403
+            throw new Error('Passwords have to be same!')
+        }
     },
 
     delete: async (req, res) => {
